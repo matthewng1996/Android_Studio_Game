@@ -10,7 +10,7 @@ public class GameView extends SurfaceView implements Runnable{
     private Thread thread;
     private boolean isPlaying = true;
     private int screenWidth, screenHeight;
-    private float screenRatioX, screenRatioY;
+    public static float screenRatioX, screenRatioY;
     private Paint paint;
     private Background sky, tree_foreground, tree_background, mountain_foreground, mountain_background;
     int tree_foregroundX = 0, tree_backgroundX = 0, mountain_foregroundX = 0, mountain_backgroundX = 0;
@@ -30,9 +30,6 @@ public class GameView extends SurfaceView implements Runnable{
         tree_foreground = new Background(screenX, screenY, getResources());
         mountain_foreground = new Background(screenX, screenY, getResources());
         mountain_background = new Background(screenX, screenY, getResources());
-
-        //background2.x = screenX;
-
         paint = new Paint();
     }
 
@@ -46,21 +43,6 @@ public class GameView extends SurfaceView implements Runnable{
     }
 
     private void update() {
-
-        //Move background backwards to simluate moving forward
-        /*
-        background1.x -= 10 * screenRatioX;
-        background2.x -= 10 * screenRatioY;
-
-        if (background1.x + background1.background.getWidth() < 0) {
-            background1.x = screenX;
-        }
-
-        if (background2.x + background2.background.getWidth() < 0) {
-            background2.x = screenX;
-        }
-        */
-
     }
 
     private void draw() {
