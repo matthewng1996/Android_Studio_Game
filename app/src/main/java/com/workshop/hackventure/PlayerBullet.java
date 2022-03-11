@@ -9,11 +9,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 public class PlayerBullet {
+
     int x, y, width, height;
     Bitmap bullet;
 
     PlayerBullet (Resources res) {
-        bullet = BitmapFactory.decodeResource(res, R.drawable.bullets); //TODO: Get the bullet png
+        bullet = BitmapFactory.decodeResource(res, R.drawable.bullet);
 
         width = bullet.getWidth();
         height = bullet.getHeight();
@@ -21,13 +22,17 @@ public class PlayerBullet {
         width /= 4;
         height /= 4;
 
-        width = (int) (width * screenRatioX);
-        height = (int) (height * screenRatioY);
+        width *= (int) Math.ceil(screenRatioX);
+        height *= (int) screenRatioY;
 
-        bullet = Bitmap.createScaledBitmap(bullet, width, height, false);
+        bullet = Bitmap.createScaledBitmap(bullet, width * 10, height * 10, false);
+    }
+
+    int getDamage() {
+        return 0;
     }
 
     Rect getCollisionShape() {
-        return new Rect(x, y, x + width, y + height);
+        return new Rect(x, y, (x + width), y + height);
     }
 }

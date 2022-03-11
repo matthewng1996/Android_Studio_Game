@@ -22,13 +22,22 @@
         android:layout_above="@+id/play"
         android:layout_centerHorizontal="true"/>
 
-    <TextView
+    <Button
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Let's go!"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-black"
         android:textSize="48sp"
         android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Objective: Kill the boss"
+        android:textSize="40sp"
+        android:layout_below="@+id/play"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

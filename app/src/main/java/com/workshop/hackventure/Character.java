@@ -9,44 +9,60 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 public class Character {
-    int toShoot = 0; //Might change to boolean
-    boolean isShooting = false, isGoingUp = false;
-    int x, y, width, height, wingCounter = 0, shootCounter = 1;
-    Bitmap characterFrame1, characterFrame2; //For character dead we just use Explode animation
+    boolean isGoingUp = false;
+    int x, y, width, height, frameCounter = 1;
+    Bitmap ufoFrame1, ufoFrame2, ufoFrame3, ufoFrame4; //For character dead we just use Explode animation
     private GameView gameView;
 
     Character(GameView gameView, int screenY, Resources res) {
         this.gameView = gameView;
 
-        //TODO: Split to array Bitmap
-        characterFrame1 = BitmapFactory.decodeResource(res, R.drawable.yellow_ufo);
-        characterFrame2 = BitmapFactory.decodeResource(res, R.drawable.yellow_ufo);
+        ufoFrame1 = BitmapFactory.decodeResource(res, R.drawable.ufo_0);
+        ufoFrame2 = BitmapFactory.decodeResource(res, R.drawable.ufo_1);
+        ufoFrame3 = BitmapFactory.decodeResource(res, R.drawable.ufo_2);
+        ufoFrame4 = BitmapFactory.decodeResource(res, R.drawable.ufo_3);
 
-        width = characterFrame1.getWidth();
-        height = characterFrame1.getHeight();
+        width = ufoFrame1.getWidth();
+        height = ufoFrame1.getHeight();
 
         width /= 4;
         height /= 4;
 
-        width = (int) (width * screenRatioX);
-        height = (int) (height * screenRatioY);
+        width *= Math.ceil(screenRatioX);
+        height *= (int) screenRatioY;
 
-        characterFrame1 = Bitmap.createScaledBitmap(characterFrame1, width, height, false);
-        characterFrame2 = Bitmap.createScaledBitmap(characterFrame2, width, height, false);
+        ufoFrame1 = Bitmap.createScaledBitmap(ufoFrame1, width * 10, height * 10, false);
+        ufoFrame2 = Bitmap.createScaledBitmap(ufoFrame2, width * 10, height * 10, false);
+        ufoFrame3 = Bitmap.createScaledBitmap(ufoFrame3, width * 10, height * 10, false);
+        ufoFrame4 = Bitmap.createScaledBitmap(ufoFrame4, width * 10, height * 10, false);
 
         y = screenY / 2;
         x = (int) (64 * screenRatioX);
     }
 
-    /* TODO:
-    Replace shooting animation with original idle/moving animation
-    Bitmap getCharacter() {
-        if (isShooting) {
-            gameView.newBullet(); //TODO: Add bullet to gameView
-            return null;
+    Bitmap getFrame() {
+        if (frameCounter != 0) {
+            if (frameCounter == 1) {
+                frameCounter++;
+                return ufoFrame1;
+            }
+            if (frameCounter == 2) {
+                frameCounter++;
+                return ufoFrame2;
+            }
+            if (frameCounter == 3) {
+                frameCounter++;
+                return ufoFrame3;
+            }
+            if (frameCounter == 4) {
+                frameCounter++;
+                return ufoFrame4;
+            }
+            frameCounter = 1;
+            gameView.newBullet();
         }
+        return ufoFrame1;
     }
-     */
 
     Rect getCollisionShape() {
         return new Rect(x, y, x + width, y + height);
